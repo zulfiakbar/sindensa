@@ -24,7 +24,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +35,13 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $params = $request->except('_token');
+        
+        // $jabatan = Jabatan::create($request);
+        $jabatan = Jabatan::create([
+            'name'=>$request->name,
+        ]);
+        return $jabatan;
     }
 
     /**
@@ -69,7 +75,15 @@ class JabatanController extends Controller
      */
     public function update(Request $request, Jabatan $jabatan)
     {
-        //
+        // $params = $request->except('_token');
+
+        // $jabatan->update($request);
+        // $jabatan = Jabatan::update([
+        //     'name'=>$request->name,
+        // ]);
+        $jabatan->name = $request->name;
+        $jabatan->save();
+        return $jabatan;
     }
 
     /**
@@ -80,6 +94,6 @@ class JabatanController extends Controller
      */
     public function destroy(Jabatan $jabatan)
     {
-        //
+        $jabatan->delete();
     }
 }
