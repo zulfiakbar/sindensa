@@ -18,5 +18,7 @@ class VerifyCsrfToken extends Middleware
         '/bidang/*',
         '/file',
         '/file/*',
+        '/register',
+        '/register/*',
     ];
 }
