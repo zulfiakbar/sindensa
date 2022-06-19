@@ -24,7 +24,10 @@ class BidangController extends Controller
      */
     public function create()
     {
-        //
+        $bidang = Bidang::create([
+            'name'=>$request->name,
+        ]);
+        return $bidang;
     }
 
     /**
@@ -69,7 +72,9 @@ class BidangController extends Controller
      */
     public function update(Request $request, Bidang $bidang)
     {
-        //
+        $bidang->name = $request->name;
+        $bidang->save();
+        return $bidang;
     }
 
     /**
