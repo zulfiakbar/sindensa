@@ -35,9 +35,31 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
 
+        if ($request->has('file')) {
+            $file = $request->file('file');
+            $name = "_" . time();
+            $fileName = $name . "." . $file->getClientOriginalExtension();
+
+            $folder = '/public/storage/uploads';
+            $filePath = $file->storeAs($folder, $fileName, 'public');
+
+            $params = [
+                'path' => $filePath,
+            ];
+            File::create($params);
+            // if (ProductImage::create($params)) {
+            //     Session::flash('success', 'Image has been uploaded');
+            // }else {
+                // Session::flash('error', 'Image could not be uploaded');
+            // }
+
+            // return redirect('admin/products/' . $id . '/images');
+        }
+    }
+    
+    
+    
     /**
      * Display the specified resource.
      *

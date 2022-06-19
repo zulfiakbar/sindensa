@@ -21,5 +21,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('jabatan', 'JabatanController'); 
+Route::resource('file', 'FileController'); 
 
 
