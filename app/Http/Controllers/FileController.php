@@ -35,26 +35,20 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-
         if ($request->has('file')) {
             $file = $request->file('file');
             $name = "_" . time();
             $fileName = $name . "." . $file->getClientOriginalExtension();
-
             $folder = '/public/storage/uploads';
             $filePath = $file->storeAs($folder, $fileName, 'public');
 
             $params = [
-                'path' => $filePath,
+                'berkas' => $filePath,
+                'no_berkas'=>$request->no_berkas,
+                'nama_berkas'=>$request->nama_berkas,
+                'status_berkas'=>1,
             ];
             File::create($params);
-            // if (ProductImage::create($params)) {
-            //     Session::flash('success', 'Image has been uploaded');
-            // }else {
-                // Session::flash('error', 'Image could not be uploaded');
-            // }
-
-            // return redirect('admin/products/' . $id . '/images');
         }
     }
     
@@ -91,7 +85,18 @@ class FileController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        //
+        if ($request->has('file')) {
+            $file = $request->file('file');
+            $name = "_" . time();
+            $fileName = $name . "." . $file->getClientOriginalExtension();
+            $folder = '/public/storage/uploads';
+            $filePath = $file->storeAs($folder, $fileName, 'public');
+            $params = [
+                'berkas' => $filePath,
+                'status_berkas'=> Auth::user()->bidang->id,
+            ];
+            $file->update($params);
+        }
     }
 
     /**

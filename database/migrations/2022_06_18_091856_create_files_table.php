@@ -19,6 +19,7 @@ class CreateFilesTable extends Migration
             $table->string('no_berkas')->unique() ;
             $table->string('nama_berkas');
             $table->unsignedBigInteger('status_berkas');
+            $table->string('berkas');
             $table->timestamps();
         });
     }
